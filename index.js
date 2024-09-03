@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load existing entries from localStorage
+    // Load existing entries from localStorage when the page is loaded
     loadEntries();
 
     document.getElementById('registration-form').addEventListener('submit', function(event) {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Save entry to localStorage
         saveEntry(entry);
 
-        // Add entry to the table
+        // Add entry to the table immediately
         addEntryToTable(entry);
 
         // Reset the form
@@ -45,28 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Validate email using regex
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 }
 
+// Calculate age from date of birth
 function calculateAge(dob) {
     const diff = Date.now() - dob.getTime();
     const age = new Date(diff).getUTCFullYear() - 1970;
     return age;
 }
 
+// Save entry to localStorage
 function saveEntry(entry) {
     let entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.push(entry);
     localStorage.setItem('entries', JSON.stringify(entries));
 }
 
+// Load entries from localStorage and add them to the table
 function loadEntries() {
     const entries = JSON.parse(localStorage.getItem('entries')) || [];
     entries.forEach(addEntryToTable);
 }
 
+// Add a new entry to the table
 function addEntryToTable(entry) {
     const tableBody = document.getElementById('table-body');
     const newRow = document.createElement('tr');
