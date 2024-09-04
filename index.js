@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         savedData.push(formData);
         localStorage.setItem('formData', JSON.stringify(savedData));
 
-        // Add data to table
+        // Add data to table immediately
         addDataToTable(formData);
 
-        // Reset the form
+        // Reset the form for the next entry
         form.reset();
     });
 
